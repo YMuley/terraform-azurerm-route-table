@@ -9,9 +9,9 @@ resource "azurerm_route_table" "route_table" {
   disable_bgp_route_propagation = each.value.disable_bgp_route_propagation
   tags                          = each.value.tags == null ? var.default_values.tags : each.value.tags
   dynamic "route" {
-    for_each = each.value.routes
+    for_each = each.value.route_list
     content {
-      name                   = route.value.route
+      name                   = route.value.name
       address_prefix         = route.value.address_prefix
       next_hop_type          = route.value.next_hop_type
       next_hop_in_ip_address = route.value.next_hop_type == "VirtualAppliance" ? route.value.next_hop_in_ip_address : null
