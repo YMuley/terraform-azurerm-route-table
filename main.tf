@@ -8,6 +8,7 @@ resource "azurerm_route_table" "route_table" {
   location                      = each.value.location == null ? var.default_values.location : each.value.location
   disable_bgp_route_propagation = each.value.disable_bgp_route_propagation
   tags                          = each.value.tags == null ? var.default_values.tags : each.value.tags
+  
   dynamic "route" {
     for_each = each.value.route_list
     content {
